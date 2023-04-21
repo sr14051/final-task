@@ -1,0 +1,25 @@
+<!-- stereo plugin that produces a raw_stereo message
+    -->
+    <map name="sensor" flag="gazebo">
+      <verbatim key="controller_${name}_camera">
+        <controller:ros_stereo_camera name="${name}_controller" plugin="libros_stereo_camera.so">
+          <alwaysOn>true</alwaysOn>
+          <updateRate>20.0</updateRate>
+          <leftCamera>${name}_l_sensor</leftCamera>
+          <rightCamera>${name}_r_sensor</rightCamera>
+          <topicName>${name}/raw_stereo</topicName>
+          <frameName>${name}_optical_frame</frameName>
+          <CxPrime>320</CxPrime>
+          <Cx>320</Cx>
+          <Cy>240</Cy>
+          <focal_length>320</focal_length> <!-- image_width / (2*tan(hfov_radian /2)) -->
+          <distortion_k1>0</distortion_k1>
+          <distortion_k2>0</distortion_k2>
+          <distortion_k3>0</distortion_k3>
+          <distortion_t1>0</distortion_t1>
+          <distortion_t2>0</distortion_t2>
+          <baseline>${stereo_dy}</baseline> <!-- home pos. of robot has +x forward, +y left -->
+          <interface:stereocamera name="${name}_iface" />
+        </controller:ros_stereo_camera>
+      </verbatim>
+    </map>
